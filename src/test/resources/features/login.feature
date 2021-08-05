@@ -1,6 +1,16 @@
-Feature: Online banking login feature
+Feature:Online Banking Login Feature
+
+  Background: User login
+    Given the user is on the login page
+
+  Scenario: Authorized users should be able to login to the application
+    And User logins with username "username" and password "password"
+    Then the "Account Summary" page should be displayed
+
 
   @wip
-  Scenario: Autherized users should be able to login to the application
-    Given The user is on yhe login page
-    Then user enters credentials and logs in
+  Scenario: Unauthorized users should NOT be able to login
+    When User logins with username "wrong" and password "wrong"
+    Then Error message "Login and/or password are wrong". should be displayed
+    When User logins with username "" and password ""
+    Then Error message "Login and/or password are wrong". should be displayed
